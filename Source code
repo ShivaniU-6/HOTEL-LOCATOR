@@ -1,0 +1,11 @@
+import pandas as pd
+import folium
+hotels = pd.read_csv("Hotels.csv")
+places = pd.read_csv("Places.csv")
+types = pd.read_csv("Typess.csv")
+hotels.head()
+cut_labels = ['Low','Moderate','High']
+hotels['Budget'] = pd.qcut(hotels['PRICE_RUPEES'][hotels['PRICE_RUPEES']>0],q=[0,.25, .75, 1], labels=cut_labels).astype("object")
+hotels['Popularity'] = pd.qcut(hotels['NUMBER_OF_REVIEWS'][hotels['NUMBER_OF_REVIEWS']>0],q=[0,.25, .75, 1], labels=cut_labels).astype("object")
+hotels.head()
+hotels['Budget'].value_counts()
