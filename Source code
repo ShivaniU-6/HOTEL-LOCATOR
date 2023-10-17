@@ -1,3 +1,6 @@
+Colab share code
+CODE:
+
 import pandas as pd
 import folium
 hotels = pd.read_csv("Hotels.csv")
@@ -9,3 +12,261 @@ hotels['Budget'] = pd.qcut(hotels['PRICE_RUPEES'][hotels['PRICE_RUPEES']>0],q=[0
 hotels['Popularity'] = pd.qcut(hotels['NUMBER_OF_REVIEWS'][hotels['NUMBER_OF_REVIEWS']>0],q=[0,.25, .75, 1], labels=cut_labels).astype("object")
 hotels.head()
 hotels['Budget'].value_counts()
+import pandas as pd
+import folium
+
+# Load hotel data
+hotels = pd.read_csv("Hotels.csv")            #Staying recommandadtion
+
+# Define labels for budget and popularity
+cut_labels = ['Low', 'Moderate', 'High']
+
+# Categorize hotels based on budget and popularity
+hotels['Budget'] = pd.qcut(hotels['PRICE_RUPEES'][hotels['PRICE_RUPEES'] > 0], q=[0, .25, .75, 1], labels=cut_labels).astype("object")
+hotels['Popularity'] = pd.qcut(hotels['NUMBER_OF_REVIEWS'][hotels['NUMBER_OF_REVIEWS'] > 0], q=[0, .25, .75, 1], labels=cut_labels).astype("object")
+
+# Define the location of the map
+Jaipur_location = [26.9124, 75.7873]
+
+print("You can refer and type the budget levels from above!")
+p = str(input("Enter your budget: "))
+
+# Create the map
+Jaipur_map = folium.Map(location=Jaipur_location, zoom_start=12, tiles='openstreetmap')
+
+# Define icons for different types of hotels
+icon_map = {
+    "Low": "bed",
+    "Moderate": "building",
+    "High": "suitcase"
+}
+
+# Loop through each hotel and add a marker to the map
+for lat, lon, name, price, popularity, budget in zip(hotels['Lat'], hotels['Lng'], hotels['HOTEL'], hotels['PRICE_RUPEES'], hotels['Popularity'], hotels['Budget']):
+
+    # Select an icon based on the hotel's popularity
+    #icon_name = icon_map[popularity]
+    #icon_name2= icon_map["cutlery"]
+
+    # Add a marker to the map with the appropriate icon and popup message
+    folium.Marker([lat, lon],
+                  radius=10,
+                  popup='<strong>Hotel:</strong> ' + str(name) + '<br>' +
+                        '<strong>Price:</strong> ' + str(price) + '<br>' +
+                        '<strong>Popularity:</strong> ' + str(popularity) + '<br>',
+                  icon=folium.Icon(color="blue", icon="hotel", prefix='fa')
+                 ).add_to(Jaipur_map)
+
+# Display the map
+Jaipur_map
+
+icon=folium.Icon(color="red",icon="hotel", prefix='fa')
+import pandas as pd
+import folium
+
+# Load hotel data
+hotels = pd.read_csv("Hotels.csv")            #Staying recommandadtion
+
+# Define labels for budget and popularity
+cut_labels = ['Low', 'Moderate', 'High']
+
+# Categorize hotels based on budget and popularity
+hotels['Budget'] = pd.qcut(hotels['PRICE_RUPEES'][hotels['PRICE_RUPEES'] > 0], q=[0, .25, .75, 1], labels=cut_labels).astype("object")
+hotels['Popularity'] = pd.qcut(hotels['NUMBER_OF_REVIEWS'][hotels['NUMBER_OF_REVIEWS'] > 0], q=[0, .25, .75, 1], labels=cut_labels).astype("object")
+
+# Define the location of the map
+Jaipur_location = [26.9124, 75.7873]
+
+# Create the map
+Jaipur_map = folium.Map(location=Jaipur_location, zoom_start=12, tiles='openstreetmap')
+
+# Define icons for different types of hotels
+icon_map = {
+    "Low": "bed",
+    "Moderate": "building",
+    "High": "suitcase"
+}
+
+# Loop through each hotel and add a marker to the map
+for lat, lon, name, price, popularity, budget in zip(hotels['Lat'], hotels['Lng'], hotels['HOTEL'], hotels['PRICE_RUPEES'], hotels['Popularity'], hotels['Budget']):
+
+    # Select an icon based on the hotel's popularity
+    icon_name = icon_map[popularity]
+
+    # Add a marker to the map with the appropriate icon and popup message
+    folium.Marker([lat, lon],
+                  radius=10,
+                  popup='<strong>Hotel:</strong> ' + str(name) + '<br>' +
+                        '<strong>Price:</strong> ' + str(price) + '<br>' +
+                        '<strong>Popularity:</strong> ' + str(popularity) + '<br>',
+                  icon=folium.Icon(color="red", icon=icon_name, prefix='fa')
+                 ).add_to(Jaipur_map)
+
+# Display the map
+Jaipur_map
+
+import pandas as pd
+import folium
+
+# Load hotel data
+hotels = pd.read_csv("Hotels.csv")            #Staying recommandadtion
+
+# Define labels for budget and popularity
+cut_labels = ['Low', 'Moderate', 'High']
+
+# Categorize hotels based on budget and popularity
+hotels['Budget'] = pd.qcut(hotels['PRICE_RUPEES'][hotels['PRICE_RUPEES'] > 0], q=[0, .25, .75, 1], labels=cut_labels).astype("object")
+hotels['Popularity'] = pd.qcut(hotels['NUMBER_OF_REVIEWS'][hotels['NUMBER_OF_REVIEWS'] > 0], q=[0, .25, .75, 1], labels=cut_labels).astype("object")
+
+# Define the location of the map
+Jaipur_location = [26.9124, 75.7873]
+
+# Create the map
+Jaipur_map = folium.Map(location=Jaipur_location, zoom_start=12, tiles='openstreetmap')
+
+# Define icons for different types of hotels
+icon_map = {
+    "Low": "bed",
+    "Moderate": "building",
+    "High": "suitcase"
+}
+
+# Loop through each hotel and add a marker to the map
+for lat, lon, name, price, popularity, budget in zip(hotels['Lat'], hotels['Lng'], hotels['HOTEL'], hotels['PRICE_RUPEES'], hotels['Popularity'], hotels['Budget']):
+
+    # Select an icon based on the hotel's popularity
+    icon_name = icon_map[popularity]
+
+    # Add a marker to the map with the appropriate icon and popup message
+    folium.Marker([lat, lon],
+                  radius=10,
+                  popup='<strong>Hotel:</strong> ' + str(name) + '<br>' +
+                        '<strong>Price:</strong> ' + str(price) + '<br>' +
+                        '<strong>Popularity:</strong> ' + str(popularity) + '<br>',
+                  icon=folium.Icon(color="blue", icon=icon_name, prefix='fa')
+                 ).add_to(Jaipur_map)
+
+# Display the map
+Jaipur_map
+
+import pandas as pd
+import folium
+
+# Load hotel data
+hotels = pd.read_csv("Hotels.csv")            #Staying recommandadtion
+
+# Define labels for budget and popularity
+cut_labels = ['Low', 'Moderate', 'High']
+
+# Categorize hotels based on budget and popularity
+hotels['Budget'] = pd.qcut(hotels['PRICE_RUPEES'][hotels['PRICE_RUPEES'] > 0], q=[0, .25, .75, 1], labels=cut_labels).astype("object")
+hotels['Popularity'] = pd.qcut(hotels['NUMBER_OF_REVIEWS'][hotels['NUMBER_OF_REVIEWS'] > 0], q=[0, .25, .75, 1], labels=cut_labels).astype("object")
+
+# Define the location of the map
+Jaipur_location = [26.9124, 75.7873]
+
+# Create the map
+Jaipur_map = folium.Map(location=Jaipur_location, zoom_start=12, tiles='openstreetmap')
+
+# Define icons for different types of hotels
+icon_map = {
+    "Low": "bed",
+    "Moderate": "building",
+    "High": "suitcase"
+}
+
+# Loop through each hotel and add a marker to the map
+for lat, lon, name, price, popularity, budget in zip(hotels['Lat'], hotels['Lng'], hotels['HOTEL'], hotels['PRICE_RUPEES'], hotels['Popularity'], hotels['Budget']):
+
+    # Select an icon based on the hotel's popularity
+    #icon_name = icon_map[popularity]
+    #icon_name2= icon_map["cutlery"]
+
+    # Add a marker to the map with the appropriate icon and popup message
+    folium.Marker([lat, lon],
+                  radius=10,
+                  popup='<strong>Hotel:</strong> ' + str(name) + '<br>' +
+                        '<strong>Price:</strong> ' + str(price) + '<br>' +
+                        '<strong>Popularity:</strong> ' + str(popularity) + '<br>',
+                  icon=folium.Icon(color="blue", icon="cutlery", prefix='fa')
+                 ).add_to(Jaipur_map)
+
+# Display the map
+Jaipur_map
+
+print("You can refer and type the budget levels from above!")
+p = str(input("Enter your budget: "))
+
+data = hotels[hotels['Budget'] == p]
+
+jaipur_map = folium.Map(location=[26.9124, 75.7873], zoom_start=12,tiles='openstreetmap')
+for lat, lon, name, price, popularity in zip(data['Lat'], data['Lng'], data['HOTEL'],data['PRICE_RUPEES'],data['Popularity']):
+
+    folium.Marker([lat, lon],
+                        radius=10,
+                        popup = ('<strong>Hotel</strong>: ' + str(name) + '<br>'
+                                '<strong>Price</strong>: ' + str(price) + '<br>'
+                                '<strong>Popularity</strong>: ' + str(popularity) + '<br>'),
+                     icon=folium.Icon(color='purple',icon="glass", prefix='fa')).add_to(jaipur_map)
+jaipur_map
+
+df =  pd.merge(places, types , on=["PID",'POIs'])
+df.head()
+df['PRIORITY_1'].value_counts()
+
+print("You can refer and type the priorities from above!")
+p = str(input("Enter your priority: "))
+
+data = df[df['PRIORITY_5'] == p]
+
+
+logo_url = 'https://hips.hearstapps.com/delish/assets/17/31/1501791674-delish-chicken-curry-horizontal.jpg'
+jaipur_map = folium.Map(location=[26.9124, 75.7873], zoom_start=12,tiles='openstreetmap')
+for lat, lon, name, intime1, outtime1,intime2, outtime2 in zip(data['LATITUDE'], data['LONGITUDE'], data['POIs'],data['IN-TIME1'],data['OUT-TIME1'],data['IN-TIME2'],data['OUT-TIME2']):
+    icon = folium.features.CustomIcon(logo_url,\
+                                  icon_size=(50,50))
+    folium.Marker([lat, lon],
+                        radius=10,
+                        popup = ('<strong>Place</strong>: ' + str(name) + '<br>'
+                                '<strong>In Time 1</strong>: ' + str(intime1) + '<br>'
+                                '<strong>Out Time 1</strong>: ' + str(outtime1) + '<br>'
+                                '<strong>In Time 2</strong>: ' + str(intime2) + '<br>'
+                                '<strong>Out Time 2</strong>: ' + str(outtime2) + '<br>'),
+                     icon= icon).add_to(jaipur_map)
+jaipur_map
+
+print("You can refer and type the priorities from above!")
+p = str(input("Enter your priority: "))
+
+data = df[df['PRIORITY_1'] == p]
+
+
+logo_url = 'https://www.makemytrip.com/travel-guide/media/dg_image/jaipur/thumb/Paragliding_425791_14_jaipur_218_168.jpg'
+jaipur_map = folium.Map(location=[26.9124, 75.7873], zoom_start=12,tiles='openstreetmap')
+for lat, lon, name, intime1, outtime1,intime2, outtime2 in zip(data['LATITUDE'], data['LONGITUDE'], data['POIs'],data['IN-TIME1'],data['OUT-TIME1'],data['IN-TIME2'],data['OUT-TIME2']):
+    icon = folium.features.CustomIcon(logo_url,\
+                                  icon_size=(50,50))
+
+    folium.Marker([lat, lon],
+                        radius=10,
+                        popup = ('<strong>Place</strong>: ' + str(name) + '<br>'
+                                '<strong>In Time 1</strong>: ' + str(intime1) + '<br>'
+                                '<strong>Out Time 1</strong>: ' + str(outtime1) + '<br>'
+                                '<strong>In Time 2</strong>: ' + str(intime2) + '<br>'
+                                '<strong>Out Time 2</strong>: ' + str(outtime2) + '<br>'),
+                     icon= icon).add_to(jaipur_map)
+jaipur_map
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+plt.style.use('dark_background')
+
+df=pd.read_csv('Hotels.csv')
+df
+df.info()
+df.duplicated().sum()
+df.head()
+plt.figure(figsize=(16,8))
+sns.lineplot(x='NUMBER_OF_REVIEWS',y='PRICE_RUPEES',data=df)
